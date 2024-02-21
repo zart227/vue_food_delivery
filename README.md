@@ -1,4 +1,4 @@
-# vue_project_practice
+# vue_food_delivery
 
 ## Project setup
 ```
