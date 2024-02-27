@@ -23,7 +23,7 @@
 
         </div>
 
-        <Button isBasketFooter textShow buttonText="Выйти" />
+        <Button isBasketFooter textShow buttonText="Выйти" @click="logout" />
       </div>
     </div>
   </header>
@@ -62,6 +62,14 @@ export default {
     isItem: {
       type: Boolean,
       default: false
+    }
+  },
+  methods: {
+    logout () {
+      // Очищаем локальное хранилище и перенаправляем на страницу авторизации
+      localStorage.setItem('currentUser', [])
+      localStorage.setItem('isAuthenticated', false)
+      this.$router.push('/auth')
     }
   },
   setup () {

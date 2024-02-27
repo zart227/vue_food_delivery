@@ -58,6 +58,10 @@ export default {
     isRotated: {
       type: Boolean,
       default: false
+    },
+    isGoodFooter: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -74,7 +78,8 @@ export default {
         buttonBasketCard: this.isBasketCard,
         buttonBasketFooter: this.isBasketFooter,
         buttonBasketMain: this.isBasketMain,
-        buttonRotate: this.isRotated
+        buttonRotate: this.isRotated,
+        buttonGoodFooter: this.isGoodFooter
       }
     }
   }
@@ -138,6 +143,21 @@ export default {
   text-align: center;
 }
 
+.buttonGoodFooter {
+  width: 200px;
+  height: 42px;
+  // color: rgb(213, 140, 81);
+  background: none;
+  border: 1px solid #D58C51;
+  background: #D58C51;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17px;
+  letter-spacing: 0%;
+  text-align: center;
+}
+
 .buttonRotate {
   rotate: 45deg;
 }
@@ -160,5 +180,10 @@ export default {
 .buttonBasketFooter:hover {
   background: #D58C51;
   color: rgb(19, 19, 19);
+}
+
+.buttonGoodFooter:hover {
+  background: none;
+  color: rgb(213, 140, 81);
 }
 </style>

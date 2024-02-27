@@ -22,9 +22,11 @@
           <div class="item__descr">
               <h2 class="item__title">{{ product.title }}</h2>
               <p class="item__description">{{ product.description }}</p>
-              <span class="item__price">{{ product.price.toLocaleString() }} ₽</span>
-              <Button isBasketFooter textShow buttonText="В корзину"  @click="addToCart" />
-          </div>
+              <div class="item__footer">
+                <span class="item__price">{{ product.price.toLocaleString() }} ₽</span>
+                <Button isGoodFooter textShow buttonText="В корзину"  @click="addToCart" />
+              </div>
+            </div>
       </div>
   </div>
 </template>
@@ -89,34 +91,42 @@ export default {
     overflow: auto;
 
     &__ipreview {
-        width: 501px;
-        height: 503px;
+      width: 501px;
+      height: 503px;
     }
 
     &__descr {
-        padding: 60px 10px 40px 150px;
+      padding: 60px 10px 40px 150px;
     }
 
     &__title {
-        font-size: 30px;
-        font-family: Montserrat;
-        font-weight: 500;
-        margin-bottom: 46px;
-        color: #D58C51;
+      font-size: 30px;
+      font-family: Montserrat;
+      font-weight: 500;
+      margin-bottom: 46px;
+      color: #D58C51;
     }
 
     &__description {
-        font-size: 14px;
-        font-family: Montserrat;
-        font-weight: 400;
-        margin-bottom: 30px;
+      font-size: 14px;
+      font-family: Montserrat;
+      font-weight: 400;
+      margin-bottom: 30px;
     }
 
     &__price {
-        font-size: 23px;
-        font-family: Montserrat;
-        font-weight: 500;
-        margin-bottom: 30px;
+      font-size: 23px;
+      font-family: Montserrat;
+      font-weight: 500;
+      padding-right: 137px;
+    }
+
+    &__footer {
+      display: flex;
+      align-items: center;
+      // justify-content: space-between;
+      margin-top: 34px;
+      margin-bottom: 30px;
     }
 
 }

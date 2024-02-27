@@ -13,7 +13,7 @@
         <span v-if="passwordError" class="auth-form__error">{{ passwordError }}</span>
       </div>
       <button type="submit" class="auth-form__submit">{{ mode === 'login' ? 'Войти' : 'Зарегистрироваться' }}</button>
-      <button class="auth-form__toggle" @click="toggleMode">{{ mode === 'login' ? 'Зарегистрироваться' : 'Авторизоваться' }}</button>
+      <span class="auth-form__toggle" @click="toggleMode">{{ mode === 'login' ? 'Зарегистрироваться' : 'Авторизоваться' }}</span>
     </form>
   </div>
 </template>
@@ -88,6 +88,8 @@ export default {
     },
     toggleMode () {
       this.mode = this.mode === 'login' ? 'register' : 'login'
+      this.usernameError = ''
+      this.passwordError = ''
     }
   }
 }
