@@ -5,6 +5,7 @@
                 <Button fontIcon='fa-solid fa-arrow-left fa-2xs' isBasketCard iconShow />
             </router-link>
             <h1 class="main__header-info">Корзина с выбранными товарами</h1>
+            <Button isBasketFooter textShow buttonText="Выйти" @click="logout" />
         </div>
     </div>
 </template>
@@ -18,6 +19,14 @@ export default {
     Button
   },
   props: {
+  },
+  methods: {
+    logout () {
+      // Очищаем локальное хранилище и перенаправляем на страницу авторизации
+      localStorage.setItem('currentUser', [])
+      localStorage.setItem('isAuthenticated', false)
+      this.$router.push('/auth')
+    }
   },
   setup () {
   }

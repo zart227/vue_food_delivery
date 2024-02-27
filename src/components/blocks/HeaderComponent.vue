@@ -77,12 +77,6 @@ export default {
 
     const router = useRouter()
 
-    // const count = computed(() => {
-    //   return store.getters.getCountBasketProduct
-    // })
-    // const price = computed(() => {
-    //   return store.getters.getAllPriceInBasket
-    // })
     const basketCount = computed(() => {
       return store.getters.getBasketGoods
     })

@@ -10,6 +10,7 @@
       <router-link to="/basket">
         <Button fontIcon='fa-solid fa-regular fa-basket-shopping fa-3xs' isBasketMain iconShow />
       </router-link>
+      <Button isBasketFooter textShow buttonText="Выйти" @click="logout" />
     </div>
   </div>
 </template>
@@ -25,6 +26,14 @@ export default {
     Button
   },
   props: {
+  },
+  methods: {
+    logout () {
+      // Очищаем локальное хранилище и перенаправляем на страницу авторизации
+      localStorage.setItem('currentUser', [])
+      localStorage.setItem('isAuthenticated', false)
+      this.$router.push('/auth')
+    }
   },
   setup () {
     const store = useStore()
