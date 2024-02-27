@@ -61,9 +61,9 @@ export default {
     }
   },
 
-  data () {
+  // data () {
 
-  },
+  // },
 
   // определяет вычисляемое свойство buttonClass, которое возвращает объект с классами CSS
   // в зависимости от значений определенных свойств.
@@ -77,11 +77,11 @@ export default {
         buttonRotate: this.isRotated
       }
     }
-  },
-
-  methods: {
-
   }
+
+  // methods: {
+
+  // }
 }
 </script>
 

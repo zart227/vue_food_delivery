@@ -1,9 +1,7 @@
 import goods from './goods'
 export default {
   state: {
-    goodsInBasket: [
-
-    ]
+    goodsInBasket: []
   },
   getters: {
     // Геттер для получения товаров в корзине
@@ -14,13 +12,25 @@ export default {
     addGoodInBasket (state, value) {
       goods.state.goods.forEach(good => {
         if (value === good.id) {
-          state.goodsInBasket.push(good)
+          const itemBasket = {
+            id: good.id,
+            imageSource: good.imageSource,
+            title: good.title,
+            price: good.price
+          }
+          state.goodsInBasket.push(itemBasket)
         }
       })
+      localStorage.basket = JSON.stringify(state.goodsInBasket)
+    },
+    SetStoreBasket (state, val) {
+      state.goodsInBasket = JSON.parse(localStorage.getItem('basket'))
+      console.log(state.goodsInBasket)
     },
     // Мутация для удаления товара из корзины
     removeGoodFromBasket (state, value) {
       state.goodsInBasket.splice(value, 1)
+      localStorage.basket = JSON.stringify(state.goodsInBasket)
     }
   },
   actions: {

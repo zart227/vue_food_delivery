@@ -3,6 +3,7 @@
     <CardProduct
       v-for="( cartData, index ) in prodCartData"
       v-bind:key="index"
+      :productId="cartData.id"
       :title="cartData.title"
       :description="cartData.description"
       :price="cartData.price"
@@ -25,8 +26,8 @@ export default {
   },
   props: {
   },
-  data () {
-  },
+  // data () {
+  // },
   setup () {
     const store = useStore()
 
@@ -36,7 +37,7 @@ export default {
 
     // Создаем функцию для удаления товара из корзины
     const removeFromBasket = (goodIndex) => {
-      console.log('Удалено из корзины', goodIndex)
+      // console.log('Удалено из корзины', goodIndex)
       // Вызываем мутацию removeGoodFromBasket из хранилища с переданным индексом товара для удаления
       store.commit('removeGoodFromBasket', goodIndex)
     }

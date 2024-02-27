@@ -5,7 +5,7 @@
       <div class="header__text">
         <span>{{ basketCount.length }} товара</span>
         <!-- сумма стоимости всех товаров в корзине -->
-        <span>на сумму {{ basketCount.reduce((a, b) => a + b.price, 0) }} ₽</span>
+        <span>на сумму {{ (basketCount.reduce((a, b) => a + b.price, 0)).toLocaleString()  }} ₽</span>
       </div>
       <router-link to="/basket">
         <Button fontIcon='fa-solid fa-regular fa-basket-shopping fa-3xs' isBasketMain iconShow />

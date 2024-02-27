@@ -8,7 +8,7 @@
         </div>
         <hr class="separator">
         <div class="main__footer">
-            <FooterBasket price="6 220 ₽" />
+            <FooterBasket />
         </div>
     </div>
 </template>

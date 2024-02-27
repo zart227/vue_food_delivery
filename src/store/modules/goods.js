@@ -58,13 +58,24 @@ export default {
         price: 2700,
         imageSource: require('@/assets/img/image0.png')
       }
-    ]
+    ],
+    Product: null
   },
   getters: {
     // Геттер для получения всех товаров
-    getGoods: state => state.goods
+    getGoods: state => state.goods,
+    // Геттер для получения товара по id
+    getGoodById: state => id => {
+      return state.goods.find(good => good.id === id)
+    },
+    getProductItem: state => state.Product
   },
   mutations: {
+    SetProductItem (state, val) {
+      state.Product = state.goods.find(element => {
+        return element.id === +val
+      })
+    }
   },
   actions: {
   },

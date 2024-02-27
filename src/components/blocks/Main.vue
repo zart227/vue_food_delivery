@@ -1,13 +1,14 @@
 <template>
   <div class="main">
     <CardProduct
-      v-for="( cartData, index ) in prodCartData"
+      v-for="( cardData, index ) in prodCardData"
       v-bind:key="index"
-      :title="cartData.title"
-      :description="cartData.description"
-      :price="cartData.price"
-      :imageSource="cartData.imageSource"
-      @clickMain = "addToBasket(cartData.id)"
+      :productId=cardData.id
+      :title="cardData.title"
+      :description="cardData.description"
+      :price="cardData.price"
+      :imageSource="cardData.imageSource"
+      @clickMain = "addToBasket(cardData.id)"
     />
   </div>
 </template>
@@ -23,15 +24,15 @@ export default {
   components: {
     CardProduct
   },
-  data () {
-  },
+  // data () {
+  // },
   props: {
   },
   setup () {
     const store = useStore()
 
     // Создаем вычисляемое свойство для получения списка товаров
-    const prodCartData = computed(() => {
+    const prodCardData = computed(() => {
       // Используем геттер getGoods из хранилища для получения списка товаров
       return store.getters.getGoods
     })
@@ -42,7 +43,7 @@ export default {
       store.commit('addGoodInBasket', goodId)
     }
     return {
-      prodCartData,
+      prodCardData,
       addToBasket
     }
   }

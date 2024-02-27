@@ -2,7 +2,7 @@
   <div class="main">
       <div class="main__info">
         <!-- вывод общей стоимости товаров в корзине   -->
-        <span class="main__info-price">{{ basketCount.reduce((a, b) => a + b.price, 0) }} ₽</span>
+        <span class="main__info-price">{{ (basketCount.reduce((a, b) => a + b.price, 0)).toLocaleString()  }} ₽</span>
           <p class="main__info-text">Заказ на сумму:</p>
       </div>
       <Button isBasketFooter textShow buttonText="Оформить заказ" />

@@ -1,17 +1,22 @@
 <template>
-  <div style="display: flex; justify-content: center;">
+  <div
+    class="card-product"
+    @click="router.push(`/product/${productId}`)"
+  >
     <div v-if="!line" class="card">
       <div class="card__info">
-        <img class="card__image" :src="imageSource" alt="image.png">
+
+          <img class="card__image" :src="imageSource" alt="image.png">
+
         <h2 class="card__title">{{ title }}</h2>
         <h3 class="card__description">{{ description }}</h3>
       </div>
       <div class="card__footer">
         <div class="card__price">
-          <span>{{ price }} ₽</span>
+          <span>{{ price.toLocaleString()  }} ₽</span>
         </div>
         <Button
-         @click="$emit('clickMain')" fontIcon='fa-solid fa-plus fa-2xs' isMain iconShow />
+         @click.stop="$emit('clickMain')" fontIcon='fa-solid fa-plus fa-2xs' isMain iconShow />
       </div>
     </div>
     <div v-else class="cardBasket">
@@ -21,10 +26,10 @@
       </div>
       <div class="cardBasket__elemets">
         <div class="card__price">
-          <span>{{ price }} ₽</span>
+          <span>{{ price.toLocaleString()  }} ₽</span>
         </div>
         <Button
-         @click="$emit('clickBasket')" fontIcon='fa-solid fa-plus fa-2xs' isBasketCard iconShow isRotated />
+         @click.stop="$emit('clickBasket')" fontIcon='fa-solid fa-plus fa-2xs' isBasketCard iconShow isRotated />
       </div>
     </div>
   </div>
@@ -34,6 +39,7 @@
 // import { ref } from 'vue'
 import Button
   from '../ui/Button.vue'
+import { useRouter } from 'vue-router'
 
 export default {
   name: 'CardProduct',
@@ -43,6 +49,10 @@ export default {
   },
   props: {
     line: Boolean,
+    productId: {
+      type: Number,
+      required: true
+    },
     title: {
       type: String,
       default: 'Название блюда'
@@ -61,11 +71,26 @@ export default {
     }
   },
   setup () {
+    const router = useRouter()
+    // const goToProductPage = () => {
+    //   // Используем метод push маршрутизатора для перехода на страницу товара с нужным id
+    //   router.push({ name: 'product', params: { id: this.productId } })
+    // }
+    return {
+      // goToProductPage,
+      router
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.card-product {
+  display: flex;
+  justify-content: center;
+  cursor: pointer; /* Добавляем указатель при наведении, чтобы показать, что карточка кликабельна */
+}
+
 .card {
   display: flex;
   flex-direction: column;
