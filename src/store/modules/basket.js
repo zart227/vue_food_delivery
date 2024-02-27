@@ -25,7 +25,7 @@ export default {
     },
     SetStoreBasket (state, val) {
       state.goodsInBasket = JSON.parse(localStorage.getItem('basket'))
-      console.log(state.goodsInBasket)
+      // console.log(state.goodsInBasket)
     },
     // Мутация для удаления товара из корзины
     removeGoodFromBasket (state, value) {

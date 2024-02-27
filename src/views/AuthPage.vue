@@ -1,21 +1,32 @@
 <template>
-  <div class="auth-form">
-    <h2 class="auth-form__title">{{ mode === 'login' ? 'Авторизация' : 'Регистрация' }}</h2>
-    <form @submit.prevent="handleSubmit" class="auth-form__form">
-      <div class="auth-form__field">
-        <label for="username" class="auth-form__label">Логин:</label>
-        <input type="text" id="username" v-model="username" class="auth-form__input">
-        <span v-if="usernameError" class="auth-form__error">{{ usernameError }}</span>
-      </div>
-      <div class="auth-form__field">
-        <label for="password" class="auth-form__label">Пароль:</label>
-        <input type="password" id="password" v-model="password" class="auth-form__input">
-        <span v-if="passwordError" class="auth-form__error">{{ passwordError }}</span>
-      </div>
-      <button type="submit" class="auth-form__submit">{{ mode === 'login' ? 'Войти' : 'Зарегистрироваться' }}</button>
-      <span class="auth-form__toggle" @click="toggleMode">{{ mode === 'login' ? 'Зарегистрироваться' : 'Авторизоваться' }}</span>
-    </form>
-  </div>
+  <main class="main">
+    <!-- <div class="auth-form">
+      <h2 class="auth-form__title">{{ mode === 'login' ? 'Авторизация' : 'Регистрация' }}</h2> -->
+      <form @submit.prevent="handleSubmit" class="auth-form">
+        <span class="auth-form__toggle" @click="toggleMode">{{ mode === 'login' ? 'Зарегистрироваться' : 'Авторизоваться' }}</span>
+        <h2 class="auth-form__title">{{ mode === 'login' ? 'Вход' : 'Регистрация' }}</h2>
+        <div class="auth-form__body">
+          <div class="auth-form__field">
+            <!-- <label for="username" class="auth-form__label">Логин:</label> -->
+            <input type="text" id="username" placeholder="Логин" v-model="username" class="auth-form__input">
+            <span v-if="usernameError" class="auth-form__error">{{ usernameError }}</span>
+          </div>
+          <div class="auth-form__field">
+            <!-- <label for="password" class="auth-form__label">Пароль:</label> -->
+            <input type="password" id="password" placeholder="Пароль" v-model="password" class="auth-form__input">
+            <span v-if="passwordError" class="auth-form__error">{{ passwordError }}</span>
+          </div>
+         <div class="auth-form__subscribe">
+            <label class="auth-form__subscribe-label" v-if="mode === 'register'">Я согласен получать обновления на почту
+              <input class="auth-form__checkbox" type="checkbox" id="subscribe" v-model="subscribe">
+              <span class="auth-form__checkmark"></span>
+            </label>
+          </div>
+          <button type="submit" class="auth-form__submit">{{ mode === 'login' ? 'Войти' : 'Зарегистрироваться' }}</button>
+        </div>
+      </form>
+    <!-- </div> -->
+  </main>
 </template>
 
 <script>
@@ -26,6 +37,7 @@ export default {
       mode: 'login',
       username: '',
       password: '',
+      subscribe: false,
       isValidUsername: true,
       isValidPassword: true,
       usernameError: '',
@@ -75,7 +87,7 @@ export default {
             if (users.some(u => u.username === this.username)) {
               alert('Пользователь с таким логином уже существует')
             } else {
-              users.push({ username: this.username, password: this.password })
+              users.push({ username: this.username, password: this.password, subscribe: this.subscribe })
               localStorage.setItem('users', JSON.stringify(users))
               alert('Регистрация успешна. Теперь вы можете авторизоваться.')
               this.mode = 'login'
@@ -95,59 +107,185 @@ export default {
 }
 </script>
 
-<style scoped>
-.auth-form {
-  max-width: 300px;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+<style lang="scss" scoped>
+.main {
+  height: 100vh;
+  background-image: url(../assets/img/bgAuth.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
-.auth-form__form {
+.auth-form {
+  width: 460px;
   display: flex;
   flex-direction: column;
-}
+  position: relative;
+  background-color: #fff;
+  padding: 9px 20px 20px 20px;
+  box-sizing:border-box;
 
-.auth-form__title {
-  margin-bottom: 20px;
-  font-size: 20px;
-}
+  &__title {
+    font-size: 31px;
+    font-family: Montserrat;
+    font-weight: 700;
+    margin: auto;
+    margin-bottom: 36px;
+  }
 
-.auth-form__field {
-  margin-bottom: 10px;
-}
+  &__body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    // margin-bottom: 40px;
+  }
 
-.auth-form__label {
-  margin-bottom: 5px;
-}
+  &__field {
+    width: 100%;
+    // margin-bottom: 10px;
+    position: relative;
+  }
 
-.auth-form__input {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-}
+  &__input {
+    border: 1px solid #D58C51;
+    border-radius: 60px;
+    font-size: 16px;
+    // position: relative;
+    color: #161516;
+    font-family: Montserrat;
+    font-weight: 400;
+    line-height: 20px;
+    margin-bottom: 15px;
+    width: 100%;
+    height: 39px;
+    box-sizing:border-box;
+    padding-left: 20px;
+  }
 
-.auth-form__error {
-  color: red;
-}
+  &__subscribe{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    // margin-bottom: 28px;
+    position: absolute;
+    top: 210px;
+    left: 20px;
+  }
 
-.auth-form__submit {
-  padding: 8px;
-  border: none;
-  border-radius: 3px;
-  background-color: #007bff;
-  color: white;
-  cursor: pointer;
-}
+  &__subscribe-label {
+    font-size: 11px;
+    color: #301411;
+    font-family: Montserrat;
+    font-weight: 300;
 
-.auth-form__toggle {
-  margin-top: 10px;
-  align-self: flex-end;
-  padding: 5px 10px;
-  border: none;
-  background-color: transparent;
-  color: #007bff;
-  cursor: pointer;
+    display: block;
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    // font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  &__checkbox {
+    // box-sizing: border-box;
+    //border: 1px solid rgb(213, 140, 81);
+    // border-radius: 50%;
+    // style
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+
+  &__checkmark {
+    position: absolute;
+    top: -3px;
+    left: 0;
+    height: 18px;
+    width: 18px;
+    // background-color: #eee;
+    border: 1px solid rgb(213, 140, 81);
+    border-radius: 50%;
+  }
+
+  /* On mouse-over, add a grey background color */
+  &__subscribe-label:hover input ~ &__checkmark {
+    background-color: #ccc;
+  }
+
+  /* When the checkbox is checked, add a blue background */
+  &__subscribe-label input:checked ~ &__checkmark {
+    background-color: #2196F3;
+  }
+
+  /* Create the checkmark/indicator (hidden when not checked) */
+  &__checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+
+  /* Show the checkmark when checked */
+  &__subscribe-label input:checked ~ &__checkmark:after {
+    display: block;
+  }
+
+  /* Style the checkmark/indicator */
+  &__subscribe-label &__checkmark:after {
+    left: 5px;
+    top: 1px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+
+  &__error {
+    color: rgb(255, 11, 11);
+    font-family: Montserrat;
+    font-weight: 300;
+    position: absolute;
+    font-size: 8px;
+    top: 42px;
+    left: 20px;
+  }
+
+  &__submit {
+    width: 200px;
+    height: 42px;
+    // color: rgb(213, 140, 81);
+    background: none;
+    border: 1px solid #D58C51;
+    background: #D58C51;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17px;
+    letter-spacing: 0%;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 46px;
+    margin-bottom: 14px;
+  }
+
+  &__toggle {
+    font-size: 11px;
+    font-family: Montserrat;
+    font-weight: 300;
+    cursor: pointer;
+    width: max-content;
+    margin-left: auto;
+    margin-bottom: 15px;
+    color: #D58C51;
+  }
 }
 </style>
